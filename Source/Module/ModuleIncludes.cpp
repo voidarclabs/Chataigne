@@ -83,6 +83,11 @@
 #include "modules/controller/streamdeck/models/StreamDeckV2.cpp"
 #include "modules/controller/streamdeck/models/StreamDeckXL.cpp"
 
+#include "modules/controller/ajazz/AjazzDevice.cpp"
+#include "modules/controller/ajazz/AjazzManager.cpp"
+#include "modules/controller/ajazz/AjazzModule.cpp"
+#include "modules/controller/ajazz/commands/AjazzCommand.cpp"
+
 #include "modules/controller/loupedeck/LoupedeckShape.cpp"
 #include "modules/controller/loupedeck/LoupedeckShapeManager.cpp"
 #include "modules/controller/loupedeck/LoupedeckModule.cpp"

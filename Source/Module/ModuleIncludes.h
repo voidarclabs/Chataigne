@@ -91,6 +91,11 @@
 #include "modules/controller/streamdeck/models/StreamDeckV2.h"
 #include "modules/controller/streamdeck/models/StreamDeckXL.h"
 
+#include "modules/controller/ajazz/AjazzDevice.h"
+#include "modules/controller/ajazz/AjazzManager.h"
+#include "modules/controller/ajazz/AjazzModule.h"
+#include "modules/controller/ajazz/commands/AjazzCommand.h"
+
 
 #include "modules/controller/wiimote/WiimotePairUtil.h"
 #include "modules/controller/wiimote/WiimoteManager.h"
