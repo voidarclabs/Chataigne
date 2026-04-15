@@ -125,6 +125,49 @@ Chataigne is using a modified version of JUCE. So you first need to compile the 
   - Check the dependency section below if you have dependency problems when running Chataigne
   - Enjoy !
 
+### macOS specific tips
+
+**Prerequisites:** Xcode (available from the Mac App Store) is required to build on macOS.
+
+The Xcode project expects JUCE to be at `~/JUCE`. Since JUCE is already bundled in this repository, the easiest setup is a symlink:
+```bash
+ln -s /path/to/Chataigne/JUCE ~/JUCE
+```
+Replace `/path/to/Chataigne` with the actual path where you cloned this repo.
+
+Once the symlink is in place, open `Builds/MacOSX/Chataigne.xcodeproj` in Xcode and build, or use the command line:
+```bash
+# For Apple Silicon (arm64)
+xcodebuild -project Builds/MacOSX/Chataigne.xcodeproj \
+           -scheme "Chataigne - App" \
+           -configuration DebugSilicon \
+           -destination "platform=macOS" \
+           build
+
+# For Intel (x86_64)
+xcodebuild -project Builds/MacOSX/Chataigne.xcodeproj \
+           -scheme "Chataigne - App" \
+           -configuration Debug \
+           -destination "platform=macOS" \
+           build
+```
+
+The built app will be at `Builds/MacOSX/build/<configuration>/Chataigne.app`.
+
+Use `Release` / `ReleaseSilicon` instead of `Debug` / `DebugSilicon` for optimized builds.
+
+**Post-build: bundle required dylibs**
+
+After building, the pre-built mosquitto and OpenSSL dylibs (already present in `External/mosquitto/lib/osx/`) must be copied into the app bundle and re-signed, otherwise the app will crash at launch:
+```bash
+APP=Builds/MacOSX/build/DebugSilicon/Chataigne.app   # adjust config as needed
+FRAMEWORKS="$APP/Contents/Frameworks"
+
+mkdir -p "$FRAMEWORKS"
+cp External/mosquitto/lib/osx/lib{mosquitto,mosquittopp,ssl,crypto}.dylib "$FRAMEWORKS/"
+codesign --force --deep --sign - "$APP"
+```
+
 ### Linux specific tips
 You'll need to build this lib to run the app:
 https://github.com/HBPVIS/servus
