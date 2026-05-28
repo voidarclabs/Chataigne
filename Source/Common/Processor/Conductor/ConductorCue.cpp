@@ -12,7 +12,7 @@
 #include "TimeMachine/TimeMachineIncludes.h"
 
 ConductorCue::ConductorCue(var params, Multiplex* multiplex) :
-	Action("Cue", params, multiplex, true, false),
+	Action("Cue", params, multiplex, true, true),
 	isCurrent(false),
 	isNext(false),
 	index(-1),
