@@ -140,7 +140,10 @@ void Conductor::triggerCue(ConductorCue* cue, bool triggeredFromConductor)
 
 	if (currentCue != nullptr)
 	{
-		if (currentCue != nullptr) currentCue->setIsCurrent(false);
+	    if (currentCue != cue && currentCue->csmOff != nullptr) {
+			currentCue->csmOff->triggerAll();
+		}
+		currentCue->setIsCurrent(false);
 	}
 
 	currentCue = cue;
